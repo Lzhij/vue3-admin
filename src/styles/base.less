@@ -1,0 +1,364 @@
+@import url('./variables.less');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Chinese Quote', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol';
+  color: rgba(0, 0, 0, 0.65);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  position: relative;
+  z-index: 9999;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: @color-primary;
+}
+
+ul,
+ol,
+dl,
+li {
+  list-style: none;
+}
+
+h1,
+h2,
+h3 {
+  font-style: normal;
+  font-weight: normal;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+}
+
+// 图片
+img {
+  @modes: fill, contain, cover;
+
+  each(@modes, {
+      &[mode="@{value}"] {
+        width: 100%;
+        height: 100%;
+        object-fit: @value !important;
+      }
+    }
+  );
+}
+// 溢出隐藏
+.hide {
+  overflow: hidden;
+}
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* 样式重置 start */
+// 表格
+.ant-table .ant-table-tbody .ant-table-row-cell-break-word .ant-btn {
+  padding: 0 0 0 5px;
+
+  &:first-child:not(.danger) {
+    padding-left: 0;
+  }
+
+  &.danger {
+    color: #e54d42;
+
+    &[disabled] {
+      color: rgba(0, 0, 0, 0.25);
+    }
+  }
+}
+
+// 新增/编辑富文本
+.card-rich-text .ant-card-body {
+  padding: 0;
+}
+
+// 必填
+.ant-form-item.required .ant-form-item-label label::before {
+  content: '*';
+  display: inline-block;
+  margin-right: 4px;
+  color: @color-danger;
+  font-size: 14px;
+  font-family: SimSun, sans-serif;
+  line-height: 1;
+}
+
+// 分页
+.ant-table + .ant-table-pagination.ant-pagination {
+  margin-bottom: 0;
+}
+
+/* 样式重置 end */
+/* 文本的粗细 start */
+@weights: {
+  400: 400;
+  500: 500;
+  600: 600;
+  700: 700;
+};
+
+each(@weights, {
+    .fw-@{key} {
+      font-weight: @value !important;
+    }
+  }
+);
+/* 字体的粗细 end */
+/* 字体大小 start */
+@sizes: {
+  14: 14px;
+  16: 16px;
+  18: 18px;
+  20: 20px;
+  22: 22px;
+  24: 24px;
+  26: 26px;
+  28: 28px;
+  30: 30px;
+  32: 32px;
+  34: 34px;
+  36: 36px;
+  38: 38px;
+  40: 40px;
+  42: 42px;
+};
+each(@sizes, {
+    .fs-@{key} {
+      font-size: @value !important;
+    }
+  }
+);
+/* 字体大小 end */
+/* 布局 start */
+.t-center {
+  text-align: center !important;
+}
+.t-right {
+  text-align: right !important;
+}
+
+.flex {
+  display: flex !important;
+
+  &-1 {
+    flex: 1;
+  }
+  &-auto {
+    flex: auto;
+  }
+  &-center {
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-sa {
+    justify-content: space-around;
+  }
+
+  &-sb {
+    justify-content: space-between;
+  }
+
+  &-sc {
+    justify-content: center;
+  }
+
+  &-cc {
+    align-items: center;
+  }
+
+  &-right {
+    justify-content: flex-end;
+  }
+
+  &-dc {
+    flex-direction: column;
+  }
+
+  &-rr {
+    flex-direction: row-reverse;
+  }
+
+  &-cr {
+    flex-direction: column-reverse;
+  }
+
+  &-wrap {
+    flex-wrap: wrap;
+  }
+}
+/* 布局 end */
+/* 宽度 start */
+@widths: {
+  vw: 100vw;
+  fill: 100%;
+  100: 100px;
+  120: 120px;
+  150: 150px;
+  160: 160px;
+  210: 210px;
+  240: 240px;
+  250: 250px;
+  300: 300px;
+  420: 420px;
+  500: 500px;
+};
+each(@widths,{
+  .w-@{key} {
+    width: @value !important;
+  }
+});
+/* 宽度 end */
+
+/* 高度 start */
+@heights: {
+  vh: 100vh;
+  fill: 100%;
+};
+each(@heights,{
+  .h-@{key} {
+    height: @value !important;
+  }
+});
+/* 高度 end */
+
+/* 内外边距 start */
+@gaps: {
+  0: 0;
+  2: 2px;
+  6: 6px;
+  8: 8px;
+  10: 10px;
+  12: 12px;
+  14: 14px;
+  16: 16px;
+  18: 18px;
+  20: 20px;
+  22: 22px;
+  24: 24px;
+  26: 26px;
+  28: 28px;
+  30: 30px;
+  32: 32px;
+  34: 34px;
+  36: 36px;
+  38: 38px;
+  40: 40px;
+  48: 48px;
+  50: 50px;
+  60: 60px;
+  80: 80px;
+};
+
+each(@gaps, {
+    .m-@{key} {
+      margin: @value !important;
+    }
+
+    .m-t-@{key} {
+      margin-top: @value !important;
+    }
+
+    .m-b-@{key} {
+      margin-bottom: @value !important;
+    }
+
+    .m-l-@{key} {
+      margin-left: @value !important;
+    }
+
+    .m-r-@{key} {
+      margin-right: @value !important;
+    }
+
+    .m-tb-@{key} {
+      margin-top: @value !important;
+      margin-bottom: @value !important;
+    }
+
+    .m-lr-@{key} {
+      margin-left: @value !important;
+      margin-right: @value !important;
+    }
+
+    .p-@{key} {
+      padding: @value !important;
+    }
+
+    .p-t-@{key} {
+      padding-top: @value !important;
+    }
+
+    .p-b-@{key} {
+      padding-bottom: @value !important;
+    }
+
+    .p-l-@{key} {
+      padding-left: @value !important;
+    }
+
+    .p-r-@{key} {
+      padding-right: @value !important;
+    }
+
+    .p-tb-@{key} {
+      padding-top: @value !important;
+      padding-bottom: @value !important;
+    }
+
+    .p-lr-@{key} {
+      padding-left: @value !important;
+      padding-right: @value !important;
+    }
+  }
+);
+/* 内外边距 end */
+/* 背景色 start */
+@bgcs: {
+  white: #fff;
+};
+each(@bgcs,{
+  .bgc-@{key}{
+    background-color: @value;
+  }
+});
+/* 背景色 end */
+/* 字体色 start */
+@colors: {
+  white: #fff;
+  green: #52c41a;
+  orange: #faad14;
+  yellow: #ffe58f;
+  red: #f5222d;
+  danger: #ff4d4f;
+  grey: #999999;
+  primary: #1890ff;
+};
+each(@colors,{
+  .color-@{key}{
+    color: @value;
+  }
+});
+
+/* 字体色 end */
