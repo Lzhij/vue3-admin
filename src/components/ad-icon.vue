@@ -1,5 +1,5 @@
 <template>
-  <span class="iconfont" :class="`icon-${name}`" :style="style" />
+  <span class="iconfont" :class="`icon-${name}`" :style="{ fontSize: size }" />
 </template>
 
 <script>
@@ -10,9 +10,13 @@ export default {
       type: String,
       required: true
     },
-    style: {
-      type: Object,
-      default: () => {}
+    color: {
+      type: String,
+      default: '#666'
+    },
+    size: {
+      type: String,
+      default: '16px'
     }
   }
 }
@@ -21,6 +25,6 @@ export default {
 
 <style lang="less" scoped>
 .iconfont {
-  font-size: 16px;
+  color: v-bind(color)
 }
 </style>

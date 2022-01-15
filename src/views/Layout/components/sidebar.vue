@@ -2,9 +2,9 @@
   <div class="logo">
     <img src="@/assets/common/logo.png" :class="[!collapsed ? '' : 'small']">
   </div>
-  <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
+  <a-menu v-model:selectedKeys="selectedKeys" class="side-menu" theme="dark" mode="inline">
     <a-menu-item v-for="item in routes" :key="item.name" :title="item.meta.title" @click="$router.push({ name: item.name })">
-      <AdIcon :name="item.meta.icon" />
+      <AdIcon :name="item.meta.icon" color="#fff" class="side-icon" />
       <span v-show="!collapsed" class="title">{{ item.meta && item.meta.title }}</span>
     </a-menu-item>
   </a-menu>
@@ -37,6 +37,13 @@ const routes = computed(() =>  router.getRoutes().filter(item => !item.meta.hidd
 
     &.small {
       width: 50px;
+    }
+  }
+}
+.side-menu {
+  :deep(.ant-menu-item-selected) {
+    .side-icon {
+      color: #0094ff;
     }
   }
 }

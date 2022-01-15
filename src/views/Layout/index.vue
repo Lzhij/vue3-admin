@@ -7,7 +7,7 @@
       <a-layout>
         <Navbar v-model:collapsed="collapsed" />
         <a-layout-content
-          style="padding: 15px"
+          style="padding: 20px;overflow-y:scroll;"
         >
           <router-view />
         </a-layout-content>
