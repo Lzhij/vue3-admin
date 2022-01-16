@@ -31,7 +31,7 @@ const collapsed = ref(false)
 <style lang="less" scoped>
 .ad-enter-active,
 .ad-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 0.7s ease-in;
 }
 
 .ad-enter-from,
