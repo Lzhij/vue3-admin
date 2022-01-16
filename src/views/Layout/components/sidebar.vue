@@ -18,8 +18,15 @@ import { useRouter } from 'vue-router'
 const props = defineProps({
   collapsed: Boolean
 })
+
 const selectedKeys = ref(['home'])
+
 const router = useRouter()
+
+const curRoute = router.currentRoute.value
+
+selectedKeys.value = [curRoute.name]
+
 const routes = computed(() =>  router.getRoutes().filter(item => !item.meta.hidden))
 </script>
 

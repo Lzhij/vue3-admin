@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import { message } from 'ant-design-vue'
 
 /**
  *
@@ -28,4 +29,16 @@ export const transformTree = (list = [], root = '', parentKey = 'pid', key = 'id
 export const formatDate = (str = '') => {
   const dStr = dayjs(str)
   return dStr.format('YYYY-MM-DD')
+}
+
+/**
+ * 
+ * @param {function} callback 请求函数
+ * loading效果获取数据
+ */
+export const loadData = async(callback = () => {}) => {
+  const hide = message.loading('加载中...', 0)
+  const data = await callback()
+  hide()
+  return { data }
 }

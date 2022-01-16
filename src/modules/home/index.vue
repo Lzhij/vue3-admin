@@ -1,5 +1,5 @@
 <template>
-  <div class="home-container">
+  <div class="ad-wrapper">
     我是首页
     <ad-icon name="home" />
   </div>

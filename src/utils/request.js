@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useStore } from '@/store'
 import { message } from 'ant-design-vue'
+import router from '../router'
 
 const serve = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_URL,
@@ -23,9 +24,19 @@ serve.interceptors.response.use(
     const result = data && data.data && data.data.data
     return result
   },
-  (err) => {
-    console.log(err)
-    return Promise.reject(err)
+  ({ response }) => {
+    const { status, data } = response
+    const msg = (data && data.message) || '操作失败请稍后重试'
+    console.log(router)
+    switch (status) {
+      case 401:
+        message.error(msg)
+        router.push({ name: 'login' })
+        return Promise.reject(msg)
+      default:
+        message.error(msg)
+        return Promise.reject(data)
+    }
   }
 )
 

@@ -7,9 +7,11 @@
       <a-layout>
         <Navbar v-model:collapsed="collapsed" />
         <a-layout-content
-          style="padding: 20px;overflow-y:scroll;"
+          style="padding: 20px;overflow-y:scroll;position: relative;"
         >
-          <router-view />
+          <transition name="ad">
+            <router-view />
+          </transition>
         </a-layout-content>
         <a-layout-footer style="text-align: center">
           Mr_liu 出品 人力资源后台管理系统
@@ -27,6 +29,16 @@ const collapsed = ref(false)
 </script>
 
 <style lang="less" scoped>
+.ad-enter-active,
+.ad-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.ad-enter-from,
+.ad-leave-to {
+  opacity: 0;
+}
+
 .app-container {
   width: 100%;
   @color: #5283fd;
