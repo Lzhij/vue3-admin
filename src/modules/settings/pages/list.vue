@@ -215,7 +215,6 @@ const onSetPermission = async(id) => {
   try {
     const list = await permissionApi.get()
     permissionList.value = transformTree(list, '0')
-    console.log(permissionList.value);
   } catch {}
 }
 
@@ -223,7 +222,6 @@ const loadModel = () =>
   loadData(() =>
     rolesApi.get(queryInfo).then((res) => {
       const { rows, total } = res
-      console.log(rows)
       roleList.value = rows
       queryInfo.total = total
     })
