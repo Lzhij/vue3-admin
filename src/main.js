@@ -6,5 +6,10 @@ import App from './App.vue'
 import './styles/base.less'
 import './styles/antd.less'
 import myComponents from '@/components'
+import mixins from '@/mixins'
 
-createApp(App).use(router).use(myComponents).use(Antd).mount('#app')
+const app = createApp(App)
+
+app.mixin(mixins)
+
+app.use(router).use(myComponents).use(Antd).mount('#app')

@@ -20,8 +20,13 @@ serve.interceptors.request.use(
 )
 
 serve.interceptors.response.use(
-  (data) => {
-    const result = data && data.data && data.data.data
+  ({ data }) => {
+    const { success, message: msg } = data
+    if (!success) {
+      message.error(msg)
+      return Promise.reject(msg)
+    }
+    const result = data && data.data
     return result
   },
   ({ response }) => {

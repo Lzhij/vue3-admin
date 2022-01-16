@@ -127,10 +127,6 @@ let employeesOptions = ref([])
 
 const modalTitle = ref('添加部门')
 
-const labelCol = { span: 6 }
-
-const wrapperCol = { span: 16 }
-
 const pid = ref('')
 
 let formState = reactive({

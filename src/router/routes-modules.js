@@ -1,4 +1,4 @@
-const rules = ['home', 'company', 'departments']
+const rules = ['home', 'company', 'departments', 'settings']
 
 const modules = import.meta.globEager('../modules/**/routes.js')
 
