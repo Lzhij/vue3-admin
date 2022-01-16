@@ -93,7 +93,7 @@
       </a-tabs>
     </a-card>
 
-    <a-modal v-model:visible="modalVisible" :title="modalTitle" width="50%" @ok="handleOk" @cancel="closeHandle">
+    <a-modal v-model:visible="modalVisible" :title="modalTitle" width="40%" @ok="handleOk" @cancel="closeHandle">
       <a-form :label-col="labelCol" :wrapper-col="wrapperCol">
         <a-form-item label="部门名称" v-bind="validateInfos.name">
           <a-input v-model:value.trim="formState.name" />

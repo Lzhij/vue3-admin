@@ -7,7 +7,7 @@
     <div class="nav-list">
       <div class="l-list">
         <div class="nav-title">
-          江苏传智播客教育科技股份有限公司
+          {{ userInfo.company }}
         </div>
         <div class="nav-tag">
           体验版

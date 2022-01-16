@@ -48,6 +48,10 @@ const routes = computed(() =>  router.getRoutes().filter(item => !item.meta.hidd
   }
 }
 .side-menu {
+  :deep(.ant-menu-item) {
+    height: 60px;
+    line-height: 60px;
+  }
   :deep(.ant-menu-item-selected) {
     .side-icon {
       color: #0094ff;
