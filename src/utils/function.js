@@ -32,11 +32,11 @@ export const formatDate = (str = '') => {
 }
 
 /**
- * 
+ *
  * @param {function} callback 请求函数
  * loading效果获取数据
  */
-export const loadData = async(callback = () => {}) => {
+export const loadData = async (callback = () => {}) => {
   const hide = message.loading('加载中...', 0)
   const data = await callback()
   hide()
