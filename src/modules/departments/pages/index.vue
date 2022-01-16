@@ -46,7 +46,7 @@
                   <a-col>
                     <a-dropdown :trigger="['contextmenu']">
                       <span>
-                        <ad-icon name="setting" size="16px" />
+                        <ad-icon name="nanren" size="20px" />
                         {{ name }}
                       </span>
                     </a-dropdown>

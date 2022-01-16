@@ -22,7 +22,7 @@
               <a-table-column title="描述" data-index="description" />
               <a-table-column title="操作" :width="200" align="center">
                 <template #default="{ record: { id } }">
-                  <a href="javascript:;" class="color-primary m-lr-6 fs-12">分配权限</a>
+                  <a href="javascript:;" class="color-primary m-lr-6 fs-12" @click="onSetPermission(id)">分配权限</a>
                   <a href="javascript:;" class="color-primary m-lr-6 fs-12" @click="onEditRole(id)">修改</a>
                   <a href="javascript:;" class="color-primary m-lr-6 fs-12" @click="onDelete(id)">删除</a>
                 </template>
@@ -76,6 +76,26 @@
         </a-form-item>
       </a-form>
     </a-modal>
+
+    <a-modal v-model:visible="mVisible" title="权限分配" @cancel="onPermissionCancel" @ok="onPermissionOk">
+      <a-tree 
+        v-if="permissionList.length"
+        v-model:checkedKeys="checkKeys"
+        :tree-data="permissionList"
+        default-expand-all
+        :selectable="false"
+        checkable
+        @check="onCheck"	
+      >
+        <template #title="{name}">
+          {{ name }}          
+        </template>
+      </a-tree>
+      <div v-else class="load-box">
+        <a-spin size="large" />
+        加载中...
+      </div>
+    </a-modal>
   </div>
 </template>
 
@@ -83,8 +103,8 @@
 import { reactive, ref, createVNode } from 'vue'
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue'
 import { Form, message, Modal } from 'ant-design-vue'
-import { rolesApi, companyApi } from '../api'
-import { loadData } from '@/utils/function.js'
+import { loadData, transformTree } from '@/utils/function.js'
+import { rolesApi, companyApi, permissionApi, setPermissionApi } from '../api'
 
 const useForm = Form.useForm
 
@@ -98,7 +118,15 @@ const roleId = ref(null)
 
 const modalVisible = ref(false)
 
+const mVisible = ref(false)
+
 const title = ref('添加角色')
+
+const permissionList = ref([])
+
+const permissionKeys = ref([])
+
+const checkKeys = ref([])
 
 let formState = reactive({
   name: '',
@@ -118,6 +146,11 @@ const queryInfo = reactive({
 
 const { resetFields, validate, validateInfos } = useForm(formState, formRules)
 
+const onCheck = function() {
+  const keys = arguments[1].checkedNodes.map(item => item.props.id)
+  permissionKeys.value = keys
+}
+
 const onAddRole = () => {
   modalVisible.value = true
   title.value = '添加角色'
@@ -130,6 +163,18 @@ const onEditRole = async (id) => {
     Object.assign(formState, data)
     title.value = '编辑角色'
     modalVisible.value = true
+  } catch {}
+}
+
+const onPermissionCancel = () => permissionKeys.value = checkKeys.value = []
+
+const onPermissionOk = async() => {
+  const body = { id: roleId.value, permIds: permissionKeys.value }
+  try {
+    await setPermissionApi.put(body)
+    mVisible.value = false
+    message.success('权限分配成功')
+    onPermissionCancel()
   } catch {}
 }
 
@@ -164,10 +209,21 @@ const onDelete = (id) => {
   })
 }
 
+const onSetPermission = async(id) => {
+  roleId.value = id
+  mVisible.value = true
+  try {
+    const list = await permissionApi.get()
+    permissionList.value = transformTree(list, '0')
+    console.log(permissionList.value);
+  } catch {}
+}
+
 const loadModel = () =>
   loadData(() =>
     rolesApi.get(queryInfo).then((res) => {
       const { rows, total } = res
+      console.log(rows)
       roleList.value = rows
       queryInfo.total = total
     })
@@ -183,5 +239,14 @@ companyApi.get().then(res => {
 <style lang="less" scoped>
 .set-list {
   padding: 30px 20px 0;
+}
+
+.load-box {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #efefef;
 }
 </style>
