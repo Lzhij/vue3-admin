@@ -28,11 +28,13 @@ const collapsed = ref(false)
 
 <style lang="less" scoped>
 .app-container {
+  width: 100%;
   @color: #5283fd;
   @txt-color: #fff;
   height: 100vh;
   .ant-layout {
     min-height: 100%;
+    width: 100%;
     .ant-layout-sider {
       background: @color url('../../assets/common/leftnavBg.png') no-repeat bottom ;
       box-shadow: 2px 0px 5px rgba(0, 0, 0, .4);

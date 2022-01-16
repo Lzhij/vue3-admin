@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 /**
  *
  * @param {array} list 必传参数 列表数据
@@ -16,4 +18,14 @@ export const transformTree = (list = [], root = '', parentKey = 'pid', key = 'id
     }
   })
   return treeMap[root]
+}
+
+/**
+ *
+ * @param {string} str 日期字符串
+ * @returns {string} 格式化后的日期
+ */
+export const formatDate = (str = '') => {
+  const dStr = dayjs(str)
+  return dStr.format('YYYY-MM-DD')
 }
