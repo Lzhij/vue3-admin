@@ -1,4 +1,4 @@
-export default {
+export default [{
   path: '/departments',
   name: 'departments',
   component: () => import('./pages/index.vue'),
@@ -7,3 +7,4 @@ export default {
     icon: 'tree'
   }
 }
+]

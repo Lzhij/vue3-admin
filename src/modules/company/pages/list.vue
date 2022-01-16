@@ -1,6 +1,6 @@
 <template>
   <a-card>
-    <a-table row-key="id" bordered :data-source="companyData">
+    <a-table row-key="id" bordered :data-source="companyData" size="middle">
       <a-table-column title="序号" :width="80">
         <template #default="{index}">
           {{ index + 1 }}
@@ -16,8 +16,8 @@
         </template>
       </a-table-column>
       <a-table-column title="操作" :width="100">
-        <template #default>
-          <a-button type="link">
+        <template #default="{record: { id }}">
+          <a-button type="link" @click="goDetail(id)">
             查看
           </a-button>
         </template>
@@ -28,18 +28,23 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { companyApi } from '../api'
 import { formatDate } from '@/utils/function.js'
 
+const router = useRouter()
+
 const companyData = ref([])
 
+const goDetail = (id) => {
+  router.push('/company/detail/' + id)
+}
 
 companyApi.get().then(res => {
   res.forEach(item => {
     item.createTime = formatDate(item.createTime)
     item.modelState = !!item.state
   })
-  console.log(res)
   companyData.value = res
 })
 </script>

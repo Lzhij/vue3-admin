@@ -1,4 +1,4 @@
-export default {
+export default [{
   path: 'home',
   name: 'home',
   component: () => import('./index.vue'),
@@ -6,4 +6,4 @@ export default {
     title: '首页',
     icon: 'home'
   }
-}
+}]
