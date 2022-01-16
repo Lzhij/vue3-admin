@@ -1,7 +1,28 @@
-# Vue 3 + Vite
+# vue3-admin
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+一个基于vite脚手架搭建的vue3中台人力资源管理系统
 
-## Recommended IDE Setup
+* vue3作为项目框架
+* antd of vue 作为ui组件库
+* axios、dayjs等js库
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+
+
+#### 安装依赖
+
+```
+npm install
+```
+
+#### 运行项目
+
+```
+npm run start
+```
+
+#### 项目打包
+
+```
+npm run build
+```
+
