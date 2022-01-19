@@ -35,7 +35,7 @@
         </a-table-column>
         <a-table-column title="操作" :width="300" align="center" fixed="right">
           <template #default="{ record: { id } }">
-            <span class="fs-12 color-primary m-lr-6 link-btn">查看</span>
+            <span class="fs-12 color-primary m-lr-6 link-btn" @click="toEmployeeDetail(id)">查看</span>
             <span class="fs-12 color-primary m-lr-6 link-btn">转正</span>
             <span class="fs-12 color-primary m-lr-6 link-btn">调岗</span>
             <span class="fs-12 color-primary m-lr-6 link-btn">离职</span>
@@ -95,6 +95,9 @@ import { employmentOptions, useCheckTime } from '../useStateForm'
 import { useLoading } from '@/composables/useToggle.js'
 import { useLoadingRequest } from '@/composables/useInitRequest.js'
 import { transformTree } from '@/utils/function.js'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const formState = reactive({
   username: '',
@@ -190,6 +193,8 @@ const onDepartmentFocus = () => {
     }
   }, 500)
 }
+
+const toEmployeeDetail = (id) => router.push({ name: 'employees-detail', params: { id } })
 
 const { data, getData } = useLoadingRequest((params) => employeesApi.get(params), true, pagination)
 </script>
